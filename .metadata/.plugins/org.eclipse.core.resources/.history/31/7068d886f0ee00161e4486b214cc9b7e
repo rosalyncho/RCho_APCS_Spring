@@ -1,3 +1,4 @@
+
 public class WalkupTicket extends Ticket {
 	
 	private int ticketNumber;
@@ -18,5 +19,5 @@ public class WalkupTicket extends Ticket {
 		String walkUp = "Number: " + ticketnumber + ", Price : " + getPrice();
 		return walkUp;
 	}
-
+	
 }

@@ -10,12 +10,12 @@ public class StudentAdvanceTicket extends AdvanceTicket {
 		// if the ticket is bought 10 or more days before the event,
 		// the price is 15
 		if(days >= 10) {
-			ticketPrice = 15;
+			ticketPrice=15;
 		}
 		// if the ticket is bought 10 or more days before the event,
 		// the price is 20
 		if(days < 10) {
-			ticketPrice = 20;
+			ticketPrice=20;
 		}
 	}
 	
