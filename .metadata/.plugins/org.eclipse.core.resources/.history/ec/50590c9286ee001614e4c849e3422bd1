@@ -1,0 +1,13 @@
+public abstract class Ticket {
+	int ticketnumber;
+	double price;
+	
+	public Ticket (int ticketNumber) {
+		this.ticketnumber = ticketNumber;
+	}
+	
+	public abstract double getPrice();
+	
+	public abstract String toString();
+	
+}

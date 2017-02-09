@@ -1,0 +1,16 @@
+public abstract class Ticket {
+	int ticketnumber;
+	double price;
+	
+	public Ticket (int ticketNumber) {
+		ticketnumber = ticketNumber;
+	}
+	
+	public abstract double getPrice();
+	
+	public abstract String toString();
+	
+	public void setPrice (double p){
+		this.price = p;
+	}
+}

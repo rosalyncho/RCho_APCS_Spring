@@ -1,0 +1,26 @@
+public class StudentAdvanceTicket extends AdvanceTicket {
+	
+	private int ticketNumber;
+	private int days;
+	double ticketPrice;
+	
+	public StudentAdvanceTicket (int ticketNumber, int days) {
+		super(ticketNumber, days);
+		this.days = days;
+		if(days >= 10) {
+			ticketPrice=15;
+		}
+		if(days < 10) {
+			ticketPrice=20;
+		}
+	}
+	
+	public double getPrice() {
+		return ticketPrice;
+	}
+	
+	public String toString() {
+		String studentAdvanceTicket = "Number: " + ticketnumber + ", Price : " + getPrice();
+		return studentAdvanceTicket;
+	}
+}

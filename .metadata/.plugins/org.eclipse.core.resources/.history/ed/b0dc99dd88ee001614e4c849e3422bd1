@@ -1,0 +1,8 @@
+
+public class WalkupTicketTester {
+	public static void main (String[] args) {
+		int ticketNumber = 17;
+		WalkupTicket walkupticket = new WalkupTicket (ticketNumber);
+		System.out.println(walkupticket.toString());
+	}
+}
