@@ -8,9 +8,9 @@ public class TemperatureChanges {
 		while (input.hasNextDouble()) {
 			double tomorrowTemp = input.nextDouble();
 			double change = tomorrowTemp - todayTemp;
-			double intNumber = (int)(change*100);
-			double roundedChange = intNumber/100;
-			System.out.println(todayTemp + " to "  + tomorrowTemp + ", change = " + roundedChange);
+			
+			System.out.println(todayTemp + " to "  + tomorrowTemp
+					+ ", change = " + change);
 			todayTemp = tomorrowTemp;
 		}
 	}
