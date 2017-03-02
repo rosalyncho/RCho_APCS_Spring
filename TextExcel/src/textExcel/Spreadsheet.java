@@ -4,7 +4,9 @@ package textExcel;
 
 public class Spreadsheet implements Grid
 {
-
+	private int row;
+	private int column;
+	
 	@Override
 	public String processCommand(String command)
 	{
@@ -16,14 +18,16 @@ public class Spreadsheet implements Grid
 	public int getRows()
 	{
 		// TODO Auto-generated method stub
-		return 0;
+		row = 20;
+		return row;
 	}
 
 	@Override
 	public int getCols()
 	{
 		// TODO Auto-generated method stub
-		return 0;
+		column = 12;
+		return column;
 	}
 
 	@Override
