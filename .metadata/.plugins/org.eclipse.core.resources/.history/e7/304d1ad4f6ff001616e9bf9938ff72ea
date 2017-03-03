@@ -44,6 +44,17 @@ public class Spreadsheet implements Grid
 	public String getGridText()
 	{
 		// TODO Auto-generated method stub
-		return null;
+		String grid="   |A         |B         |C         |D         |E         |F         |G         |H         |I         |J         |K         |L         |"+"\n";
+				for (int i=0;i<20;i++){
+					if(i<9)
+						grid=grid+"  "+(i+1);
+					else
+						grid=grid+" "+(i+1);
+					for (int j=0;j<12;j++){
+						grid=grid+"|"+ excelSpreadsheet[i][j].abbreviatedCellText();
+					}
+					grid=grid+"\n";
+		
+				}return grid;
 	}
 }

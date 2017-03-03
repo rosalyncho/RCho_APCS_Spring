@@ -15,8 +15,7 @@ public class TextExcel
     	Spreadsheet excelSpreadsheet = new Spreadsheet();
     	String input = console.nextLine();
     	while(input.equals("quit")){ // loop until user types quit
-			String answer = excelSpreadsheet.processCommand(input);
-			System.out.println(answer);
+			excelSpreadsheet.processCommand(input);
 		}
 	}
 }
