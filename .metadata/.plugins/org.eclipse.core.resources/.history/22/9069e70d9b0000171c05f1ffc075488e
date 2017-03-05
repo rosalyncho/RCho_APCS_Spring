@@ -8,7 +8,7 @@ public class Spreadsheet implements Grid
 	private int column;
 	
 	public Spreadsheet() {
-	Cell[][] excelSpreadsheet = new EmptyCell[20][12];	// 2D array of cells with 20 rows and 12 columns
+	Cell[][] excelSpreadsheet = new EmptyCell[20][12];
 	}
 	
 	@Override
