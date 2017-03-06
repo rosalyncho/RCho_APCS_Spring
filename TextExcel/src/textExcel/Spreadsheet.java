@@ -7,14 +7,15 @@ public class Spreadsheet implements Grid
 	private int row;
 	private int column;
 	
-	public Spreadsheet() {
+	
 	Cell[][] excelSpreadsheet = new EmptyCell[20][12];	// 2D array of cells with 20 rows and 12 columns
-	}
+	
 	
 	@Override
 	public String processCommand(String command)
 	{
 		// TODO Auto-generated method stub
+	String[] arr = command.split(charAt.(0));
 		return command;
 	}
 
