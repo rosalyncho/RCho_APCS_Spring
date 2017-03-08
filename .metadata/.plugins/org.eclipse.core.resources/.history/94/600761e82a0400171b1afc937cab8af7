@@ -17,8 +17,8 @@ public class Spreadsheet implements Grid
 	{
 		// TODO Auto-generated method stub
 		String[] splitted = command.split(" ");
-		if (command.equals("clear")) {
-			if (command.contains(" ")) {
+		if (splitted.equals("clear")) {
+			if (splitted.length > 6) {
 				// clears the given cell
 				Location clear= new SpreadsheetLocation(splitted[1]);
 				Cell change=getCell(clear);
@@ -73,13 +73,11 @@ public class Spreadsheet implements Grid
 	public String getGridText()
 	{
 		// TODO Auto-generated method stub
-		for (int i=0; i<20; i++) {
+/*		for (int i=0; i<20; i++) {
 			for (int j=0; j<12; j++) {
-				System.out.println("  |A         |B         |C         |D         |E         |F         |G         |H         |I         |J         |K         |L         |");
-				excelSpreadsheet[i][j].abbreviatedCellText();
+				
 			}
-			System.out.println(excelSpreadsheet[i][0]);
-		} 
+		} */
 		return null; 
 	} 
 }

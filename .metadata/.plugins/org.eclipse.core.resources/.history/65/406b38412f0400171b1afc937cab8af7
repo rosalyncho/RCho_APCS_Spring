@@ -78,7 +78,6 @@ public class Spreadsheet implements Grid
 				System.out.println("  |A         |B         |C         |D         |E         |F         |G         |H         |I         |J         |K         |L         |");
 				excelSpreadsheet[i][j].abbreviatedCellText();
 			}
-			System.out.println(excelSpreadsheet[i][0]);
 		} 
 		return null; 
 	} 

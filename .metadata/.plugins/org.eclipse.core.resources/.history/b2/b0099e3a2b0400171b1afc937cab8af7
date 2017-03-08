@@ -18,17 +18,16 @@ public class Spreadsheet implements Grid
 		// TODO Auto-generated method stub
 		String[] splitted = command.split(" ");
 		if (command.equals("clear")) {
-			if (command.contains(" ")) {
-				// clears the given cell
-				Location clear= new SpreadsheetLocation(splitted[1]);
-				Cell change=getCell(clear);
-				change=new EmptyCell();
-			} else {
-				// clears the entire spreadsheet
-				excelSpreadsheet=new Cell [20][12];
-				for(int i=0; i<20; i++){
-					for(int j=0; j<12;j++){
-						excelSpreadsheet[i][j]=new EmptyCell();
+			// clears the given cell
+			Location clear= new SpreadsheetLocation(splitted[1]);
+			Cell change=getCell(clear);
+			change=new EmptyCell();
+		} else {
+			// clears the entire spreadsheet
+			excelSpreadsheet=new Cell [20][12];
+			for(int i=0; i<20; i++){
+				for(int j=0; j<12;j++){
+					excelSpreadsheet[i][j]=new EmptyCell();
 					}
 				}
 			}
@@ -75,10 +74,9 @@ public class Spreadsheet implements Grid
 		// TODO Auto-generated method stub
 		for (int i=0; i<20; i++) {
 			for (int j=0; j<12; j++) {
-				System.out.println("  |A         |B         |C         |D         |E         |F         |G         |H         |I         |J         |K         |L         |");
-				excelSpreadsheet[i][j].abbreviatedCellText();
+				excelSpreadsheet[i][j] = new EmptyCell();
+				System.out.println("          ");
 			}
-			System.out.println(excelSpreadsheet[i][0]);
 		} 
 		return null; 
 	} 
