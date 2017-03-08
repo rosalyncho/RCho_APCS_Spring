@@ -11,7 +11,14 @@ public class TextCell implements Cell {
 	@Override
 	public String abbreviatedCellText() {
 		// TODO Auto-generated method stub
-		
+/*		int strlength = content.length();
+		String abbreviated;
+		if(strlength < 10){
+			abbreviated = content.substring(0);
+		}else{
+			abbreviated = content.substring(0, 10);
+		}
+		return abbreviated; */
 		return content;
 	}
 	

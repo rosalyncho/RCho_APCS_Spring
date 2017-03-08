@@ -4,14 +4,13 @@ public class TextCell implements Cell {
 	
 	private String content;
 	
-	public TextCell (String str) {
-		str = content;
+	public String setText() {
+		return content;
 	}
 	
 	@Override
 	public String abbreviatedCellText() {
 		// TODO Auto-generated method stub
-		
 		return content;
 	}
 	
