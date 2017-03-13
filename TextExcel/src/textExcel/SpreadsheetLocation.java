@@ -4,13 +4,13 @@ package textExcel;
 
 public class SpreadsheetLocation implements Location
 {
-	private String location;
+	private int columnNumber;
+	private int rowNumber;
 	
     @Override
     public int getRow()
     {
-        // TODO Auto-generated method stub
-    	int rowNumber = Integer.parseInt(location.substring(1))-1;
+        // TODO Auto-generated method stub	
         return rowNumber;
     }
 
@@ -18,14 +18,13 @@ public class SpreadsheetLocation implements Location
     public int getCol()
     {
         // TODO Auto-generated method stub
-    	int columnNumber = location.charAt(0)-'A';
         return columnNumber;
     }
     
     public SpreadsheetLocation(String cellName)
     {
         // TODO: Fill this out with your own code
-    	location = cellName;
+    	columnNumber = cellName.charAt(0)-'A';
+    	rowNumber = Integer.parseInt(cellName.substring(1))-1;
     }
-
 }

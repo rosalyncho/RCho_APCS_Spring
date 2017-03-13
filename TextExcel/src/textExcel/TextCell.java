@@ -19,13 +19,12 @@ public class TextCell implements Cell {
 			abbreviated = content.substring(0, 10);
 		}
 		return abbreviated;
-
 	}
 	
 	@Override
 	public String fullCellText() {
 		// TODO Auto-generated method stub
-		return null;
+		return content;
 	}
 
 }

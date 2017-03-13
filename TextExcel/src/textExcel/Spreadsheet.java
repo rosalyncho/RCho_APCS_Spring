@@ -38,11 +38,11 @@ public class Spreadsheet implements Grid
 			String location = splitted[1];
 			SpreadsheetLocation loc = new SpreadsheetLocation(location);
 			excelSpreadsheet[loc.getRow()][loc.getCol()] = new EmptyCell();
-		} //if command is for example "A1 = "hello""
+		} //if the user wants to assign a String to a cell
 		else if (command.contains("=")) { 
 			String[] splitted = command.split(" ");
 			String location = splitted[0];
-			String str = splitted[1];
+			String str = splitted[2];
 			SpreadsheetLocation loc = new SpreadsheetLocation(location);
 			excelSpreadsheet[loc.getRow()][loc.getCol()] = new TextCell(str);
 			return getGridText();
@@ -88,8 +88,8 @@ public class Spreadsheet implements Grid
 			} else {
 				rowLabel = (row+1) + " |";
 			}
-			for(int j = 0; j<12; j++){
-				rowLabel += excelSpreadsheet[row][j].abbreviatedCellText() + "|";
+			for(int column = 0; column <12; column++){
+				rowLabel += excelSpreadsheet[row][column].abbreviatedCellText() + "|";
 			}
 			System.out.println(rowLabel);
 		}
