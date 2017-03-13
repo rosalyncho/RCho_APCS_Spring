@@ -1,0 +1,33 @@
+package textExcel;
+
+public class TextCell implements Cell {
+	
+	private String content;
+	
+	public TextCell (String str) {
+		str = content;
+	}
+	
+	@Override
+	public String abbreviatedCellText() {
+		// TODO Auto-generated method stub
+		if(content.length()-1>10){
+			if(content.substring(0, 1).equals("\"")){
+				if(content.substring(10, 11).equals("\""))
+					return content.substring(1, 10);
+				return content.substring(1, 11);
+			}
+			else
+				return content.substring(0, 10);
+		}	
+		else
+			return String.format("%-10s", content.substring(1, content.length()-1));
+	}
+	
+	@Override
+	public String fullCellText() {
+		// TODO Auto-generated method stub
+		return content;
+	}
+
+}
