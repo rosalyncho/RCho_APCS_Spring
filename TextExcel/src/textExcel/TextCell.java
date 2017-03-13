@@ -11,6 +11,7 @@ public class TextCell implements Cell {
 	@Override
 	public String abbreviatedCellText() {
 		// TODO Auto-generated method stub
+
 		String abbreviated;
 		if(content.length() < 10){
 			abbreviated = content.substring(0);
@@ -18,12 +19,13 @@ public class TextCell implements Cell {
 			abbreviated = content.substring(0, 10);
 		}
 		return abbreviated;
+
 	}
 	
 	@Override
 	public String fullCellText() {
 		// TODO Auto-generated method stub
-		return content;
+		return null;
 	}
 
 }

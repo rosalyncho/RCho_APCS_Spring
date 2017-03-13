@@ -21,6 +21,7 @@ public class Spreadsheet implements Grid
 	public String processCommand(String command)
 	{
 		// TODO Auto-generated method stub
+
 		if(command.equals("")){
 			return command;
 		}
@@ -29,7 +30,7 @@ public class Spreadsheet implements Grid
 				for(int j=0; j<12;j++){
 					excelSpreadsheet[i][j]=new EmptyCell();
 				}
-			}
+			} 
 			return getGridText();
 		}// if the user types in "clear" plus a particular cell
 		else if (command.toLowerCase().equals("clear ")) {
@@ -74,6 +75,7 @@ public class Spreadsheet implements Grid
 	@Override
 	public String getGridText()
 	{
+
 		String grid = "   |";
 		for(char i = 'A'; i<='L'; i++){
 			grid += i + "         |";
@@ -92,5 +94,5 @@ public class Spreadsheet implements Grid
 			System.out.println(rowLabel);
 		}
 		return "";
-	}
+	}	
 }
