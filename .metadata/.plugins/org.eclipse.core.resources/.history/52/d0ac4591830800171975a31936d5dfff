@@ -1,0 +1,121 @@
+package textExcel;
+
+// Update this file with your own code.
+
+public class Spreadsheet implements Grid
+{
+	
+	private Cell[][] excelSpreadsheet = new Cell[20][12];
+	
+	public Spreadsheet(){
+		//make array with empty cell objects
+		for(int i = 0; i < 20; i++){
+			for(int j = 0; j < 12; j++){
+				excelSpreadsheet[i][j] = new EmptyCell();
+			}
+		}
+	}
+	@Override
+	public String processCommand(String command)
+	{  	
+		String[] splitted = command.split(" ");
+		//if there is no command
+		if(splitted.equals("")){
+			return "";
+		}
+		//if command is clear
+		if(command.toLowerCase().equals("clear")){
+			for(int i = 0; i < 20; i++){
+				for(int j = 0; j < 12; j++){
+					excelSpreadsheet[i][j] = new EmptyCell();
+				}
+			}
+			return getGridText();
+		}
+		//if command is for example "clear A1"
+		if(command.toLowerCase().contains("clear ")){
+			String locationToChange = splitted[1];
+			SpreadsheetLocation location = new SpreadsheetLocation(locationToChange);
+			this.excelSpreadsheet[location.getRow()][location.getCol()] = new EmptyCell();
+			return getGridText();
+		}
+		//if command is for example "A1 = "hello""
+		if(command.contains("=")){
+	//		changeCellValue(command); // FIX THIS SHIT
+			String commandLocation = splitted[0];
+			String commandValue = splitted[2];
+			//remove quotes so value in cell will not be quoted
+			if(commandValue.contains("\"")){
+				commandValue = commandValue.replace("\"", "");
+			}
+
+			SpreadsheetLocation location = new SpreadsheetLocation(commandLocation);
+			this.excelSpreadsheet[location.getRow()][location.getCol()] = new TextCell(commandValue);
+	    	return getGridText();
+		}
+		//if command is only the location, for example "A1"
+		SpreadsheetLocation location = new SpreadsheetLocation(command);
+		return this.excelSpreadsheet[location.getRow()][location.getCol()].fullCellText();
+	}
+	
+	public void changeCellValue(String input){ // FIX THIS METHOD WITH CONTAINS = SHIT
+		// split command into location and value
+		String[] splitCommand = input.split(" = ");
+		String commandLocation = splitCommand[0];
+		String commandValue = splitCommand[1];
+		// in case there are two equal signs
+		if(splitCommand.length > 2){
+			commandValue += " = " + splitCommand[2];
+			System.out.println(commandValue);
+		}
+		//remove quotes so value in cell will not be quoted
+		if(commandValue.contains("\"")){
+			commandValue = commandValue.replace("\"", "");
+		}
+		
+		SpreadsheetLocation location = new SpreadsheetLocation(commandLocation);
+		this.excelSpreadsheet[location.getRow()][location.getCol()] = new TextCell(commandValue);
+	}
+	
+	@Override
+	public int getRows()
+	{
+		return this.excelSpreadsheet.length;
+	}
+
+	@Override
+	public int getCols()
+	{
+		return this.excelSpreadsheet[0].length;
+	}
+
+	@Override
+	public Cell getCell(Location loc)
+	{
+		return this.excelSpreadsheet[loc.getRow()][loc.getCol()];
+	}
+
+	@Override
+	public String getGridText()
+	{
+		String topLetter = "   |";
+		for(char i = 'A'; i<='L'; i++){
+			topLetter += i + "         |";
+		}
+		String numbers = "\n";
+		for(int i = 0;i < 20;i++){
+			if(i<9){
+				numbers += (i+1);
+				numbers += "  |";
+			}else{
+				numbers += (i+1);
+				numbers += " |";
+			}
+			for(int j = 0; j<12;j++){
+				numbers += excelSpreadsheet[i][j].abbreviatedCellText() + "|";
+			}
+			numbers +="\n";
+			}
+		return topLetter + numbers;
+	}
+}

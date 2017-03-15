@@ -1,0 +1,33 @@
+package textExcel;
+
+public class TextCell implements Cell {
+	
+	private String content;
+	
+	public TextCell (String str) {
+		str = content;
+	}
+	
+	@Override
+	public String abbreviatedCellText() {
+		// TODO Auto-generated method stub
+		int strlength = content.length();
+		String abbreviated;
+		if(strlength < 10){
+			abbreviated = content.substring(0);
+			for(int i = 0; i < 10-strlength;i++){
+				abbreviated += " ";
+			}
+		}else{
+			abbreviated = content.substring(0, 10);
+		}
+		return abbreviated;
+	}
+	
+	@Override
+	public String fullCellText() {
+		// TODO Auto-generated method stub
+		return content;
+	}
+
+}
