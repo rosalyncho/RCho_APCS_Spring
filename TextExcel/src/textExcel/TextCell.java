@@ -2,28 +2,21 @@ package textExcel;
 
 public class TextCell implements Cell {
 	
-private String text;
+	private String text;
+	private int length;
 	
-	public TextCell (String str){
-		text = str;
+	public TextCell(String textCell){
+		text = textCell;
+		length = textCell.length();
 	}
-
+	
+	@Override
 	public String abbreviatedCellText() {
-		if (text.length() > 10){
-			return text.substring(0, 9);	
-		}else{
-			int abbreviated = 10 - text.length();
-			String abbreviatedText = "";
-			for (int i = 0; i <= abbreviated; i++){
-				abbreviatedText +=" ";
-			}
-			return abbreviatedText;
-		}
-		
+		return (text + "          ").substring(0, 10);
 	}
-
+	
+	@Override
 	public String fullCellText() {
-		return text;
+		return ("\"" + text.substring(0, length) + "\"");
 	}
-
 }

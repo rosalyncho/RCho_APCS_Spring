@@ -5,7 +5,7 @@ package textExcel;
 public class Spreadsheet implements Grid
 {
 	
-	Cell[][] excelSpreadsheet;
+Cell[][] excelSpreadsheet;
 	
 	public Spreadsheet(){
 		excelSpreadsheet= new Cell[getRows()][getCols()];
@@ -19,7 +19,7 @@ public class Spreadsheet implements Grid
 	@Override
 	public String processCommand(String command){  	
 		
-		String[] splitted = command.split(" ");
+		String[] split = command.split(" ");
 		
 		if(command.equals(" ")){
 			return "";
@@ -33,7 +33,7 @@ public class Spreadsheet implements Grid
 			return getGridText();	
 		}
 		else if(command.toLowerCase().contains("clear ")){
-			String changeLoc = splitted[1];
+			String changeLoc = split[1];
 			SpreadsheetLocation location = new SpreadsheetLocation(changeLoc);
 			excelSpreadsheet[location.getRow()][location.getCol()] = new EmptyCell();
 			return getGridText();
@@ -52,7 +52,7 @@ public class Spreadsheet implements Grid
 			excelSpreadsheet[location.getRow()][location.getCol()] = new TextCell(cell);
 	    	return getGridText(); 
 		}
-		else if(splitted.length <= 3){
+		else if(split.length <= 3){
 			SpreadsheetLocation location = new SpreadsheetLocation(command);
 			return excelSpreadsheet[location.getRow()][location.getCol()].fullCellText();
 		}
@@ -75,8 +75,9 @@ public class Spreadsheet implements Grid
 	@Override
 	public Cell getCell(Location loc)
 	{
-		return excelSpreadsheet[loc.getRow()][loc.getCol()];	
-	}
+		int row = loc.getRow();
+		int column = loc.getCol();
+		return excelSpreadsheet[row][column];	}
 
 	@Override
 	public String getGridText(){
@@ -85,6 +86,7 @@ public class Spreadsheet implements Grid
 			grid += (char) (i + 'A') + "         |";
 		}
 		grid += "\n";
+	
 		for(int i=1; i <= getRows(); i++){
 			if(i > 9){
 				grid += i + " ";
@@ -99,4 +101,33 @@ public class Spreadsheet implements Grid
 		}
 		return grid;
 	}
+
+/*	@Override
+	public String getGridText()
+	{
+		String grid = "";
+		String header = "   |";
+		for (int col = 0; col < this.getCols(); col++){		// get the column header from A to L
+			header += ((char)('A' + col)) + "         |";
+		}
+		header += "\n";
+		grid += header;		//Add the header to "finalGrid"
+		String rowsHeading = "";
+		for (int row = 0; row < this.getRows(); row++){
+			String rows = "";
+			if (row < 9){		//if the row header digit is less than two digits.
+				rowsHeading = ((row+1)+"  |");
+			}else{		//if it exceeds one digit.
+				rowsHeading = ((row+1)+" |");
+			}
+			grid += rowsHeading;		//Add row heading to "finalGrid" before adding the actual rows.
+			for (int column = 0; column < this.getCols(); column++){	
+				rows += excelSpreadsheet[row][column].abbreviatedCellText()+"|";		//use .abbreviatedCellText of the cells itself to make sure the texts fit the boxes.
+			}
+			rows += "\n";		//add new line at the end of each row when it reaches L column.
+			grid += rows;		//add everything to "finalGrid"
+		}							//"finalGrid" turns into a very long string that prints out the whole spreadsheet.
+		return grid;
+	}
+	*/
 }

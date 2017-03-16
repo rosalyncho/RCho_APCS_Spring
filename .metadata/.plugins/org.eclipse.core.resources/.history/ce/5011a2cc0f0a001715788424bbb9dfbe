@@ -19,7 +19,7 @@ public class Spreadsheet implements Grid
 	@Override
 	public String processCommand(String command){  	
 		
-		String[] splitted = command.split(" ");
+		String[] split = command.split(" ");
 		
 		if(command.equals(" ")){
 			return "";
@@ -33,7 +33,7 @@ public class Spreadsheet implements Grid
 			return getGridText();	
 		}
 		else if(command.toLowerCase().contains("clear ")){
-			String changeLoc = splitted[1];
+			String changeLoc = split[1];
 			SpreadsheetLocation location = new SpreadsheetLocation(changeLoc);
 			excelSpreadsheet[location.getRow()][location.getCol()] = new EmptyCell();
 			return getGridText();
@@ -52,7 +52,7 @@ public class Spreadsheet implements Grid
 			excelSpreadsheet[location.getRow()][location.getCol()] = new TextCell(cell);
 	    	return getGridText(); 
 		}
-		else if(splitted.length <= 3){
+		else if(split.length <= 3){
 			SpreadsheetLocation location = new SpreadsheetLocation(command);
 			return excelSpreadsheet[location.getRow()][location.getCol()].fullCellText();
 		}
