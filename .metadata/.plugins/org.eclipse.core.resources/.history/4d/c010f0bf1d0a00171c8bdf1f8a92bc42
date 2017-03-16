@@ -1,0 +1,7 @@
+package textExcel;
+
+import realcell;
+
+public class PercentCell extends realcell {
+
+}
