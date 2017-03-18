@@ -6,18 +6,23 @@ public class RealCell implements Cell {
 	
 	@Override
 	public String abbreviatedCellText() {
-		// TODO Auto-generated method stub
-		return null;
+			return content;
 	}
 
 	@Override
 	public String fullCellText() {
-		// TODO Auto-generated method stub
-		return null;
+		return content;
+	}
+	
+	public void setCellText(String value){
+		content = value;
+	}
+	
+	public String getCellText(){
+		return content;
 	}
 	
 	public double getDoubleValue() {
-		return 0;
+		return 0.0;
 	}
-
 }
