@@ -2,16 +2,10 @@ package textExcel;
 
 public class RealCell implements Cell {
 
-	private String content;
+/*	private String content;
 	
-	@Override
-	public String abbreviatedCellText() {
-			return content;
-	}
-
-	@Override
-	public String fullCellText() {
-		return content;
+	public RealCell (String real) {
+		content = real;
 	}
 	
 	public void setCellText(String value){
@@ -22,7 +16,45 @@ public class RealCell implements Cell {
 		return content;
 	}
 	
+	@Override
+	public String abbreviatedCellText() {
+		String fix=content+"                    ";
+		return fix.substring(0,10);
+	}
+
 	public double getDoubleValue() {
 		return 0.0;
+	}
+	
+	@Override
+	public String fullCellText() {
+		return content;
+	}
+	*/
+	private String content;
+	public String getCont(){
+		return content;
+	}
+	public void setCont(String update){
+		content=update;
+	}
+	
+	public RealCell(String input){
+		content=input;
+	}
+	public double getDoubleValue(){
+		return 0;
+	}
+	public String abbreviatedCellText() {
+		// TODO Auto-generated method stub
+		
+		String fix=content+"                    ";
+		return fix.substring(0,10);
+	}
+
+	@Override
+	public String fullCellText() {
+		// TODO Auto-generated method stub
+		return content;
 	}
 }

@@ -46,15 +46,12 @@ public class Spreadsheet implements Grid
 		else if(command.contains("\"")){
 			String[] splitInput = command.split(" = ");
 			String location = splitInput[0];
-			String cell = splitInput[1];
+			String value = splitInput[1];
 			if(splitInput.length >= 3){
-				System.out.println(cell += " = " + splitInput[2]);
-			}
-			if(cell.contains("\"")){
-				cell = cell.replace("\"", "");
+				System.out.println(value += " = " + splitInput[2]);
 			}
 			SpreadsheetLocation loc = new SpreadsheetLocation(location);
-			excelSpreadsheet[loc.getRow()][loc.getCol()] = new TextCell(cell);
+			excelSpreadsheet[loc.getRow()][loc.getCol()] = new TextCell(value.substring(1, value.length()-1)); // pass in without the quotes
 	    	return getGridText(); 
 		}
 		// if the command is to inspect the cell
@@ -70,7 +67,7 @@ public class Spreadsheet implements Grid
 			excelSpreadsheet[loc.getRow()][loc.getCol()] = new PercentCell(value);
 			return getGridText();
 		}
-		else if (command.contains("-") || command.contains("+") || command.contains("/") || command.contains("*")){
+		else if (command.contains("-") || command.contains("+") || command.contains("*") || command.contains("/")){
 			String location = splitted[1];
 			String value = splitted[2];
 			SpreadsheetLocation loc = new SpreadsheetLocation(location);
@@ -78,6 +75,10 @@ public class Spreadsheet implements Grid
 			return getGridText();
 		}
 		else if(command.contains(".")) {
+			String location = splitted[1];
+			String value = splitted[2];
+			SpreadsheetLocation loc = new SpreadsheetLocation(location);
+			excelSpreadsheet[loc.getRow()][loc.getCol()] = new ValueCell(value);
 			return getGridText();
 		}
 		return command;
