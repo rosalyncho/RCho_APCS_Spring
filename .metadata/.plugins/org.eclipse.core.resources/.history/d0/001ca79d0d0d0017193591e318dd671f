@@ -20,6 +20,6 @@ public class FormulaCell extends RealCell{
 	
 	@Override
 	public double getDoubleValue(){
-		return 0.0;
+		return content;
 	}
 }

@@ -1,6 +1,6 @@
 package textExcel;
 
-public class ValueCell extends RealCell {
+public abstract class ValueCell extends RealCell {
 	
 	private double content;
 		

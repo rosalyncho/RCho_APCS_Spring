@@ -44,7 +44,7 @@ public class Spreadsheet implements Grid
 			return getGridText();
 		}
 		// if the command is to assign something to a cell
-		else if(command.contains("\"")){
+		else if(command.contains("=")){
 			String[] splitInput = command.split(" = ");
 			String location = splitInput[0];
 			String value = splitInput[1];

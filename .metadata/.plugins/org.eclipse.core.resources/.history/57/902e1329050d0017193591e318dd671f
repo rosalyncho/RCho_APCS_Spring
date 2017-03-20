@@ -1,6 +1,6 @@
 package textExcel;
 
-public class PercentCell extends RealCell {
+public abstract class PercentCell extends RealCell {
 
 	public PercentCell(String percent){
 		super (percent);

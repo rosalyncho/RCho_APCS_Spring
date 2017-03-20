@@ -18,7 +18,8 @@ public class RealCell implements Cell {
 	
 	@Override
 	public String abbreviatedCellText() {
-		return "";
+		String fix=content+"                    ";
+		return fix.substring(0,10);
 	}
 
 	public double getDoubleValue() {

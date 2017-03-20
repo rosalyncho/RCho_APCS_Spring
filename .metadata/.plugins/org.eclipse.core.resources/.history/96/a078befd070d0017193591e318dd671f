@@ -22,7 +22,6 @@ public class Spreadsheet implements Grid
 		
 		// split the command at spaces
 		String[] splitted = command.split(" ");
-		SpreadsheetLocation loc;
 		
 		if(splitted.length == 0){
 			return command;
@@ -36,15 +35,16 @@ public class Spreadsheet implements Grid
 			}
 			return getGridText();	
 		}
+		SpreadsheetLocation loc;
 		// if the command is to clear a specific cell
-		else if(splitted.length == 2){
+		if(splitted.length == 2){
 			String location = splitted[1];
 			loc = new SpreadsheetLocation(location);
 			excelSpreadsheet[loc.getRow()][loc.getCol()] = new EmptyCell();
 			return getGridText();
 		}
 		// if the command is to assign something to a cell
-		else if(command.contains("\"")){
+		if(command.contains("\"")){
 			String[] splitInput = command.split(" = ");
 			String location = splitInput[0];
 			String value = splitInput[1];
@@ -55,7 +55,12 @@ public class Spreadsheet implements Grid
 			excelSpreadsheet[loc.getRow()][loc.getCol()] = new TextCell(value.substring(1, value.length()-1)); // pass in without the quotes
 	    	return getGridText(); 
 		}
-		
+		// if the command is to inspect the cell
+		if(splitted.length <= 3){	// the length must be less than 3
+			loc = new SpreadsheetLocation(command);
+			return excelSpreadsheet[loc.getRow()][loc.getCol()].fullCellText();
+			
+		}
 		else if(command.contains("%")){
 			String location = splitted[1];
 			String value = splitted[2];
@@ -76,10 +81,8 @@ public class Spreadsheet implements Grid
 			loc = new SpreadsheetLocation(location);
 			excelSpreadsheet[loc.getRow()][loc.getCol()] = new ValueCell(value);
 			return getGridText();
-		} else {
-			loc = new SpreadsheetLocation(command);
-			return excelSpreadsheet[loc.getRow()][loc.getCol()].fullCellText();
 		}
+		return command;
 	}
 
 	

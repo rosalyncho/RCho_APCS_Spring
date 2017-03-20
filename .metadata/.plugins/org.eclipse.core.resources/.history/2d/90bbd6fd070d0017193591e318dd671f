@@ -2,20 +2,18 @@ package textExcel;
 
 public class FormulaCell extends RealCell{
 	
-	private double content;
-	
 	public FormulaCell(String formula) {
 		super (formula);
 	}
 	
 	@Override
 	public String abbreviatedCellText() {
-		return content + "";
+		return super.abbreviatedCellText();
 	}
 	
 	@Override
 	public String fullCellText() {
-		return getCellText();
+		return super.fullCellText();
 	}
 	
 	@Override

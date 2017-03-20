@@ -80,6 +80,7 @@ public class Spreadsheet implements Grid
 			loc = new SpreadsheetLocation(command);
 			return excelSpreadsheet[loc.getRow()][loc.getCol()].fullCellText();
 		}
+		return command;
 	}
 
 	
