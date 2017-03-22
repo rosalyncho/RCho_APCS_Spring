@@ -1,0 +1,28 @@
+package textExcel;
+
+public abstract class RealCell implements Cell {
+
+private String value;
+	
+	public RealCell(String input) {
+		this.value = input;
+	}
+
+	public String abbreviatedCellText() {
+		
+		String abrv = value;
+		abrv += "          ";
+		return abrv.substring(0, 10);
+	}
+
+
+	public String fullCellText() {
+
+		return this.value;
+	}
+	
+	public double getDoubleValue(){
+		return Double.parseDouble(value);
+	}
+
+}

@@ -1,0 +1,27 @@
+package textExcel;
+
+public class RealCell implements Cell {
+
+	private String content;
+	
+	public RealCell(String real) {
+		content = real;
+	}
+
+	@Override
+	public String abbreviatedCellText() 
+	{	
+		return "          ";
+	}
+
+	@Override
+	public String fullCellText() 
+	{
+		return content;
+	}
+	
+	public double getDoubleValue(String value){
+		return Double.parseDouble(value);
+	}
+
+}

@@ -2,22 +2,35 @@ package textExcel;
 
 public class ValueCell extends RealCell {
 	
-	private double content;
-		
-	public ValueCell(String value) {
-		super (value);
-		content = Double.parseDouble(super.fullCellText());;
+	public ValueCell(String value)
+	{
+		super(value);
 	}
 	
-	public String abbreviatedCellText() {
-		return super.abbreviatedCellText();
+	public double getDoubleValue()
+	{
+		String value=getCellText();
+		double number=Double.parseDouble(value);
+		return number;
 	}
 	
-	public String fullCellText(){
-		return content + "";
+	public String abbreviatedCellText()
+	{
+		String value = getCellText();
+		double abbreviated=Double.parseDouble(value);
+		value = abbreviated + "";
+		if(value.length() > 10){
+			value += (".0");
+		}
+		int difference = 10 - value.length();
+		for (int i = 0; i < difference; i++) {
+			value += " ";
+		}
+		return value.substring(0,10);
 	}
 	
-	public double getDoubleValue(){
-		return content;
+	public String fullTextCell()
+	{
+		return  getDoubleValue()+"";
 	}
 }

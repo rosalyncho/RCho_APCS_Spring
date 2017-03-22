@@ -1,0 +1,32 @@
+package textExcel;
+
+public class ValueCell extends RealCell {
+	
+	public ValueCell(String value)
+	{
+		super(value);
+	}
+	public double getDoubleValue()
+	{
+		String ball=getCellText();
+		
+		double kkkkkk=Double.parseDouble(ball);
+		return kkkkkk;
+	}
+	public String abbreviatedCellText(){
+		String abbreviated=getCellText();		
+	//	double number =Double.parseDouble(abbreviated);
+		
+		if(abbreviated.length() > 10){
+			abbreviated+=(".0");
+			int difference = 10 - abbreviated.length();
+			for(int i = 0; i < difference; i++){
+				abbreviated += " ";
+			}
+		}
+		return abbreviated.substring(0,10);
+	}
+	public String fullTextCell(){
+		return  getDoubleValue()+"";
+	}
+}
