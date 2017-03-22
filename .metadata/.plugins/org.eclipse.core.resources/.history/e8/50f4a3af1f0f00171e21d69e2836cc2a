@@ -28,19 +28,17 @@ public class Spreadsheet implements Grid
 		// split the command at spaces
 		String[] splitted = command.split(" ");
 		SpreadsheetLocation loc;
-		
 		if(splitted[0].toLowerCase().equals("save")) {
 			return writeFile(splitted[1]);
-		} 
-		else if(splitted[0].toLowerCase().equals("open")) {
+		}
+		if(splitted[0].toLowerCase().equals("open")) {
 			return readFile(splitted[1]);
 		}
-		
 		if(splitted.length == 0){
 			return command;
 		}
 		// if the command is to clear the entire sheet
-		else if(command.toLowerCase().equals("clear")){ // change the command to lower case to get rid of case issues
+		if(command.toLowerCase().equals("clear")){ // change the command to lower case to get rid of case issues
 			for(int i = 0; i < getRows(); i++){
 				for(int j = 0; j < getCols(); j++){
 					excelSpreadsheet[i][j] = new EmptyCell();
@@ -92,13 +90,13 @@ public class Spreadsheet implements Grid
 	@Override
 	public int getRows()
 	{
-		return 20;	// number of rows
+		return 20;
 	}
 
 	@Override
 	public int getCols()
 	{
-		return 12;	// number of columns
+		return 12;
 	}
 
 	@Override
@@ -109,8 +107,8 @@ public class Spreadsheet implements Grid
 
 	@Override
 	public String getGridText(){
-		String grid = "   |";	// top left part of the spreadsheet
-		for(int i=0; i < getCols(); i++){	// create the top part of the column
+		String grid = "   |";
+		for(int i=0; i < getCols(); i++){
 			grid += (char) (i + 'A') + "         |";
 		}
 		grid += "\n";
