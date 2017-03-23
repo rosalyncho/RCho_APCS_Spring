@@ -7,14 +7,10 @@ public class FormulaCell extends RealCell{
 	}
 	
 	public String abbreviatedTextCell(){
-		return super.abbreviatedCellText();
+		return null;
 	}
 	
 	public String fullCellText() {
-		return super.fullCellText();
-	}
-	
-	public double getDoubleValue() {
-		return 0;
+		return null;
 	}
 }

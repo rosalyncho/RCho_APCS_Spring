@@ -1,5 +1,0 @@
-package textExcel;
-
-public abstract class ValueCell {
-
-}

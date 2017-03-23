@@ -13,8 +13,4 @@ public class FormulaCell extends RealCell{
 	public String fullCellText() {
 		return super.fullCellText();
 	}
-	
-	public double getDoubleValue() {
-		return 0;
-	}
 }

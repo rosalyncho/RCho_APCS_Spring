@@ -214,18 +214,18 @@ I18,ValueCell,161.1
 J18,ValueCell,179.1
 K18,ValueCell,197.1
 L18,ValueCell,215.1
-A19,FormulaCell,null
-B19,FormulaCell,null
-C19,FormulaCell,null
-D19,FormulaCell,null
-E19,FormulaCell,null
-F19,FormulaCell,null
-G19,FormulaCell,null
-H19,FormulaCell,null
-I19,FormulaCell,null
-J19,FormulaCell,null
-K19,FormulaCell,null
-L19,FormulaCell,null
+A19,FormulaCell,(
+B19,FormulaCell,(
+C19,FormulaCell,(
+D19,FormulaCell,(
+E19,FormulaCell,(
+F19,FormulaCell,(
+G19,FormulaCell,(
+H19,FormulaCell,(
+I19,FormulaCell,(
+J19,FormulaCell,(
+K19,FormulaCell,(
+L19,FormulaCell,(
 A20,TextCell,"B4 = ( avg A2-A3 )"
 B20,TextCell,"( 1 * 2 / 1 + 3 - 5 )"
 C20,TextCell,"B4 = ( avg A2-A3 )"
