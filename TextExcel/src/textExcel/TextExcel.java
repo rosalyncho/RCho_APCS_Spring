@@ -20,6 +20,6 @@ public class TextExcel
 			String answer = excelSpreadsheet.processCommand(input);
 			System.out.println(answer);
 		}
-   // 	System.out.println(excelSpreadsheet.getGridText());
+    	System.out.println(excelSpreadsheet.getGridText());
 	}
 }

@@ -137,7 +137,7 @@ public class Spreadsheet implements Grid
 	     catch (FileNotFoundException e) {
 	    	 return "File not found: " + filename;
 	     }
-	     String enter="";
+	     String enter = "";
 			//for loop that checks all cells to return location, type, values stored in each
 			for(int i=0;i<20;i++){
 				for(char j='A';j<'M';j++){
