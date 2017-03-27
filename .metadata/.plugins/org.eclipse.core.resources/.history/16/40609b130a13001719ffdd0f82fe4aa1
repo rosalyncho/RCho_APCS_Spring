@@ -36,7 +36,7 @@ public class Spreadsheet implements Grid
 			return readFile(splitted[1]);
 		}
 		
-		if(command.equals("")){
+		if(splitted.length == 0){
 			return command;
 		}
 		// if the command is to clear the entire sheet
@@ -84,8 +84,7 @@ public class Spreadsheet implements Grid
 			return getGridText();
 		} 	
 		else {
-			loc = new SpreadsheetLocation(command);
-			return excelSpreadsheet[loc.getRow()][loc.getCol()].fullCellText();
+			return command;
 		}
 	}
 	

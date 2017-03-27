@@ -1,7 +1,0 @@
-package textExcel;
-
-public abstract class FormulaCell extends RealCell{
-	public FormulaCell() {
-		
-	}
-}

@@ -36,7 +36,7 @@ public class Spreadsheet implements Grid
 			return readFile(splitted[1]);
 		}
 		
-		if(command.equals("")){
+		if(splitted.length == 0){
 			return command;
 		}
 		// if the command is to clear the entire sheet
