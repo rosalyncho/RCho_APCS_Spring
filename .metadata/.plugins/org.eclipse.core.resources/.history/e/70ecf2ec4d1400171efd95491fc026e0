@@ -70,16 +70,16 @@ public class Spreadsheet implements Grid
 		else if(splitted.length>1&&splitted[1].equals("=")){
 			loc=new SpreadsheetLocation(splitted[0]);
 			if (splitted[2].charAt(0) == 34){ //a text cell
-				excelSpreadsheet [loc.getRow()] [loc.getCol()] = new TextCell (splitted[2]);
+				excelSpreadsheet [loc.getRow()] [loc.getCol()] = new TextCell (splitted[2].trim());
 			}
-			else if (splitted[2].contains("%")){ //a percent cell
-				excelSpreadsheet [loc.getRow()] [loc.getCol()] = new PercentCell (splitted[2]);	
+			else if (splitted[2].substring(splitted[2].length()-1).equals("%")){ //a percent cell
+				excelSpreadsheet [loc.getRow()] [loc.getCol()] = new PercentCell (splitted[2].trim());	
 			}
-			else if (splitted[2].contains("(")){ //a formula cell
-				excelSpreadsheet [loc.getRow()] [loc.getCol()] = new FormulaCell (splitted[2]);	
+			else if (splitted[2].charAt(0) == ('(')){ //a formula cell
+				excelSpreadsheet [loc.getRow()] [loc.getCol()] = new FormulaCell (splitted[2].trim());	
 			}
 			else { //a value cell
-				excelSpreadsheet [loc.getRow()] [loc.getCol()] = new ValueCell (splitted[2]);	
+				excelSpreadsheet [loc.getRow()] [loc.getCol()] = new ValueCell (splitted[2].trim());	
 			}
 			return getGridText();
 		} 	

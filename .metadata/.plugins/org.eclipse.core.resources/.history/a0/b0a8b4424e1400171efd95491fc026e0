@@ -75,7 +75,7 @@ public class Spreadsheet implements Grid
 			else if (splitted[2].contains("%")){ //a percent cell
 				excelSpreadsheet [loc.getRow()] [loc.getCol()] = new PercentCell (splitted[2]);	
 			}
-			else if (splitted[2].contains("(")){ //a formula cell
+			else if (splitted[2].charAt(0) == ('(')){ //a formula cell
 				excelSpreadsheet [loc.getRow()] [loc.getCol()] = new FormulaCell (splitted[2]);	
 			}
 			else { //a value cell
