@@ -28,17 +28,16 @@ public class FormulaCell extends RealCell{
 		String[] splitted = formula.split(" ");
 		double value = Double.parseDouble(splitted[0]);
 		for (int i = 1; i < splitted.length; i++) {
-			if (splitted[i].equals("*")) {
+			if (splitted[i].equals("*")) 
 				value *= Double.parseDouble(splitted[i + 1]);
-			}
-			else if (splitted[i].equals("/")) {
+			else if (splitted[i].equals("/")) 
 				value /= Double.parseDouble(splitted[i + 1]);
-			}
-			else if (splitted[i].equals("+")) {
+			else if (splitted[i].equals("+"))
 				value += Double.parseDouble(splitted[i + 1]);
-			}
-			else if (splitted[i].equals("-")) {
+			else if (splitted[i].equals("-"))
 				value -= Double.parseDouble(splitted[i + 1]);
+			else {
+				
 			}
 		}
 		return value;
