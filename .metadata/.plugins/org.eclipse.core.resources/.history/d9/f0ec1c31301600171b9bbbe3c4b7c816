@@ -36,7 +36,7 @@ public class Spreadsheet implements Grid
 			return readFile(splitted[1]);
 		}
 		
-		if(splitted.length == 0){
+		if(command.equals("")){
 			return command;
 		}
 		// if the command is to clear the entire sheet
@@ -67,19 +67,20 @@ public class Spreadsheet implements Grid
 			excelSpreadsheet[loc.getRow()][loc.getCol()] = new TextCell(value.substring(1, value.length()-1)); // pass in without the quotes
 	    	return getGridText(); 
 		}	
-		else if(splitted.length>1&&splitted[1].equals("=")){
+		else if(splitted.length>1 && splitted[1].equals("=")){
+			String[] splitted1 = command.split(" ", 2);
 			loc=new SpreadsheetLocation(splitted[0]);
 			if (splitted[2].charAt(0) == 34){ //a text cell
-				excelSpreadsheet [loc.getRow()] [loc.getCol()] = new TextCell (splitted[2].trim());
+				excelSpreadsheet [loc.getRow()] [loc.getCol()] = new TextCell (splitted[2]);
 			}
-			else if (splitted[2].substring(splitted[2].length()-1).equals("%")){ //a percent cell
-				excelSpreadsheet [loc.getRow()] [loc.getCol()] = new PercentCell (splitted[2].trim());	
+			else if (splitted[2].contains("%")){ //a percent cell
+				excelSpreadsheet [loc.getRow()] [loc.getCol()] = new PercentCell (splitted[2]);	
 			}
-			else if (splitted[2].charAt(0) == ('(')){ //a formula cell
-				excelSpreadsheet [loc.getRow()] [loc.getCol()] = new FormulaCell (splitted[2].trim());	
+			else if (splitted[2].contains("(")){ //a formula cell
+				excelSpreadsheet [loc.getRow()] [loc.getCol()] = new FormulaCell (splitted1[3]);	
 			}
 			else { //a value cell
-				excelSpreadsheet [loc.getRow()] [loc.getCol()] = new ValueCell (splitted[2].trim());	
+				excelSpreadsheet [loc.getRow()] [loc.getCol()] = new ValueCell (splitted[2]);	
 			}
 			return getGridText();
 		} 	
@@ -137,7 +138,7 @@ public class Spreadsheet implements Grid
 	     catch (FileNotFoundException e) {
 	    	 return "File not found: " + filename;
 	     }
-	     String enter="";
+	     String enter = "";
 			//for loop that checks all cells to return location, type, values stored in each
 			for(int i=0;i<20;i++){
 				for(char j='A';j<'M';j++){
@@ -158,7 +159,7 @@ public class Spreadsheet implements Grid
 			}
 			outputFile.print(enter);
 			outputFile.close();
-			return 0 + "";
+			return  "0";
 	}
 	private String readFile(String filename){
 		Scanner inputFile;
