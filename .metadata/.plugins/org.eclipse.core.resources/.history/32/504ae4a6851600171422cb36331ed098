@@ -1,0 +1,45 @@
+package textExcel;
+
+public class FormulaCell extends RealCell{
+	
+	public FormulaCell(String formula){
+		super(formula);
+	}
+	
+	public double getDoubleValue(){
+		String input = getCellText();
+		String[] splitted=input.split(" ");
+		if (splitted[0].contains("SUM")) {
+			
+		}
+		if (splitted[0].contains("AVG")) {
+			double number;
+		}
+		double first=Double.parseDouble(splitted[1]);;	//initialize currAnswer as first number and cycle through for loop
+		for(int i=2;i<splitted.length-1;i+=2){				//for loop to cycle through every other operator
+			double nextNum=Double.parseDouble(splitted[i+1]);
+			if(splitted[i].equals("+")){	//addition
+				first+=nextNum;
+			}else if(splitted[i].equals("-")){	//subtraction
+				first-=nextNum;
+			}else if(splitted[i].equals("*")){	//multiplication
+				first*=nextNum;
+			}else if(splitted[i].equals("/")){	//division
+				first/=nextNum;
+			}
+		}
+		return first;				
+	}
+	
+	@Override
+	public String abbreviatedCellText() {
+		
+		return (getDoubleValue()+"            ").substring(0, 10);	
+	}
+
+	@Override
+	public String fullCellText() {
+
+		return getCellText();	//return the formula itself only with correct calculations
+	}
+}

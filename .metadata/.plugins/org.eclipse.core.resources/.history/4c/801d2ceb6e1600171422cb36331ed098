@@ -1,0 +1,39 @@
+package textExcel;
+
+public class FormulaCell extends RealCell{
+	
+	public FormulaCell(String formula){
+		super(formula);
+	}
+	
+	public double getDoubleValue(){
+		String input = getCellText();
+		String[] splitted=input.split(" ");
+		double currAnswer=Double.parseDouble(splitted[0]);;	//initialize currAnswer as first number and cycle through for loop
+		for(int i=1;i<splitted.length;i++){				//for loop to cycle through every other operator
+			double firstNum=Double.parseDouble(splitted[i+1]);
+			if(splitted[i].equals("+")){			//addition
+				currAnswer+=firstNum;
+			}else if(splitted[i].equals("-")){	//subtraction
+				currAnswer-=firstNum;
+			}else if(splitted[i].equals("*")){	//multiplication
+				currAnswer*=firstNum;
+			}else if(splitted[i].equals("/")){	//division
+				currAnswer/=firstNum;
+			}
+		}
+		return currAnswer;				
+	}
+	
+	@Override
+	public String abbreviatedCellText() {
+		// TODO Auto-generated method stub
+		return (getDoubleValue()+"            ").substring(0, 10);		//add however many spaces and then substring
+	}
+
+	@Override
+	public String fullCellText() {
+		// TODO Auto-generated method stub
+		return getCellText();						//return the formula itself only with correct calculations
+}
+}

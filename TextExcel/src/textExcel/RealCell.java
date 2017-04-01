@@ -2,7 +2,7 @@ package textExcel;
 
 public abstract class RealCell implements Cell {
 
-	String content;
+	private String content;
 	
 	public String getCellText()
 	{
