@@ -140,25 +140,25 @@ public class Spreadsheet implements Grid
 	     catch (FileNotFoundException e) {
 	    	 return "File not found: " + filename;
 	     }
-	     String str = "";
-			for(int i = 0; i < getRows(); i++){
-				for(char j = 'A'; j < 'M'; j++){
+	     String enter = "";
+			for(int i=0; i < getRows(); i++){
+				for(char j='A';j<'M';j++){
 					Cell test=excelSpreadsheet[i][j-'A'];
 					if(excelSpreadsheet[i][j-'A'] instanceof FormulaCell){
-						str+=j+""+(i+1)+",FormulaCell,"+test.fullCellText()+"\n";
+						enter+=j+""+(i+1)+",FormulaCell,"+test.fullCellText()+"\n";
 					}
 					if(excelSpreadsheet[i][j-'A'] instanceof TextCell){
-						str+=j+""+(i+1)+",TextCell,"+test.fullCellText()+"\n";
+						enter+=j+""+(i+1)+",TextCell,"+test.fullCellText()+"\n";
 					}
 					if(excelSpreadsheet[i][j-'A'] instanceof ValueCell){
-						str+=j+""+(i+1)+",ValueCell,"+test.fullCellText()+"\n";
+						enter+=j+""+(i+1)+",ValueCell,"+test.fullCellText()+"\n";
 					}
 					if(excelSpreadsheet[i][j-'A'] instanceof PercentCell){
-						str+=j+""+(i+1)+",PercentCell,"+test.fullCellText()+"\n";
+						enter+=j+""+(i+1)+",PercentCell,"+test.fullCellText()+"\n";
 					}
 				}	
 			}
-			outputFile.print(str);
+			outputFile.print(enter);
 			outputFile.close();
 			return "";
 	}
@@ -173,19 +173,26 @@ public class Spreadsheet implements Grid
 		}
 		while(inputFile.hasNextLine()){
 			//Reads the input and decides which cell to construct
-			String input = inputFile.nextLine();
-			String[] splitted = input.split(",");
-			String cellIdentifier=splitted[0];
-			String cellType=splitted[1];
-			String cellValue=splitted[2];
-			if(cellType.equals("ValueCell"))
-				excelSpreadsheet[Integer.parseInt(cellIdentifier.substring(1))-1][cellIdentifier.charAt(0)-65]= new ValueCell(cellValue);
-			else if(cellType.equals("PercentCell"))
-				excelSpreadsheet[Integer.parseInt(cellIdentifier.substring(1))-1][cellIdentifier.charAt(0)-65]= new PercentCell(Double.parseDouble(cellValue)*100+"%");
-			else if(cellType.equals("FormulaCell"))
-				excelSpreadsheet[Integer.parseInt(cellIdentifier.substring(1))-1][cellIdentifier.charAt(0)-65]= new FormulaCell(cellValue);
-			else if(cellType.equals("TextCell"))
-				excelSpreadsheet[Integer.parseInt(cellIdentifier.substring(1))-1][cellIdentifier.charAt(0)-65]= new TextCell(cellValue.substring(1,cellValue.length()-1));
+			String[] splitInput = inputFile.nextLine().split(",");
+			String cellIdentifier = splitInput[0];
+			String cellType = splitInput[1];
+			String cellValue = splitInput[2];
+			
+			
+			SpreadsheetLocation location = new SpreadsheetLocation(cellIdentifier);
+			int row = location.getRow();
+			int col = location.getCol();
+			
+			if(cellType.equals("TextCell")){
+				excelSpreadsheet[row][col] = new TextCell(cellValue);
+			}else if(cellType.equals("PercentCell")){
+				excelSpreadsheet[row][col] = new PercentCell(cellValue);
+			}else if(cellType.equals("FormulaCell")){
+				excelSpreadsheet[row][col] = new FormulaCell(cellValue);
+			}else if(cellType.equals("ValueCell")){
+				excelSpreadsheet[row][col] = new ValueCell(cellValue);
+			}
+					
 		}
 		inputFile.close();
 		return getGridText();

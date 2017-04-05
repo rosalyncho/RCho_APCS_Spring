@@ -141,8 +141,8 @@ public class Spreadsheet implements Grid
 	    	 return "File not found: " + filename;
 	     }
 	     String str = "";
-			for(int i = 0; i < getRows(); i++){
-				for(char j = 'A'; j < 'M'; j++){
+			for(int i=0; i < getRows(); i++){
+				for(char j='A';j<'M';j++){
 					Cell test=excelSpreadsheet[i][j-'A'];
 					if(excelSpreadsheet[i][j-'A'] instanceof FormulaCell){
 						str+=j+""+(i+1)+",FormulaCell,"+test.fullCellText()+"\n";
@@ -173,11 +173,10 @@ public class Spreadsheet implements Grid
 		}
 		while(inputFile.hasNextLine()){
 			//Reads the input and decides which cell to construct
-			String input = inputFile.nextLine();
-			String[] splitted = input.split(",");
-			String cellIdentifier=splitted[0];
-			String cellType=splitted[1];
-			String cellValue=splitted[2];
+			String data=inputFile.nextLine();
+			String cellIdentifier=data.substring(0,data.indexOf(','));
+			String cellType=data.substring(data.indexOf(',')+1,data.lastIndexOf(','));
+			String cellValue=data.substring(data.lastIndexOf(',')+1);
 			if(cellType.equals("ValueCell"))
 				excelSpreadsheet[Integer.parseInt(cellIdentifier.substring(1))-1][cellIdentifier.charAt(0)-65]= new ValueCell(cellValue);
 			else if(cellType.equals("PercentCell"))

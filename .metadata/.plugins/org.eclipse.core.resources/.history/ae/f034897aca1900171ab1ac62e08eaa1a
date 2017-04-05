@@ -177,7 +177,7 @@ public class Spreadsheet implements Grid
 			String[] splitted = input.split(",");
 			String cellIdentifier=splitted[0];
 			String cellType=splitted[1];
-			String cellValue=splitted[2];
+			String cellValue=input.substring(input.lastIndexOf(',')+1);
 			if(cellType.equals("ValueCell"))
 				excelSpreadsheet[Integer.parseInt(cellIdentifier.substring(1))-1][cellIdentifier.charAt(0)-65]= new ValueCell(cellValue);
 			else if(cellType.equals("PercentCell"))
