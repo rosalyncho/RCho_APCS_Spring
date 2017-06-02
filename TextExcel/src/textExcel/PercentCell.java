@@ -8,14 +8,17 @@ public class PercentCell extends RealCell{
 	
 	public String abbreviatedCellText(){
 		String percent=getCellText();
+		// if the length is less than 10
 		if(percent.length() < 10){
-			percent=percent.substring(0,percent.indexOf("."))+"%";
-			int difference = 10 - percent.length();
-			for(int i = 0; i < difference; i++){
-				percent += " ";
+			percent=percent.substring(0,percent.indexOf("."))+"%";// gets everything before the decimal and adds "%" to it
+			int spaces = 10 - percent.length(); // spaces needed to fill in next to the content
+			for(int i = 0; i < spaces; i++){
+				percent += " ";	// fill in the spaces
 			}
+			return percent;
+		} else {	// if the content has more than 10 characters
+			return percent.substring(0,10);	// truncate the content to 10 characters
 		}
-		return percent.substring(0,10);
 	}
 	
 	public String fullCellText() {

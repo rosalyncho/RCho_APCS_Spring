@@ -2,7 +2,6 @@ package textExcel;
 
 public class FormulaCell extends RealCell{
 	
-	Cell[][] excelSpreadsheet = new Cell[20][12];
 	
 	public FormulaCell(String formula){
 		super(formula);
@@ -10,39 +9,45 @@ public class FormulaCell extends RealCell{
 	
 	public double getDoubleValue(){
 		String input = getCellText();
-		String[] splitted=input.split(" ");
-		
+		String[] splitted=input.split(" ");	// splits the formula at spaces
+		// if the formula contains "SUM"
 		if (splitted[0].toLowerCase().contains("sum")) {
-		
+			String[] range = splitted[1].split("-");
+			
 		}
+		// if the formula contains "AVG"
 		if (splitted[0].toLowerCase().contains("avg")) {
-			double number;
+			
 		}
 		double first=Double.parseDouble(splitted[1]);
 		for(int i=2;i<splitted.length-1;i+=2){
-			double nextNum=Double.parseDouble(splitted[i+1]);
-			if(splitted[i].equals("+")){	//addition
-				first+=nextNum;
-			}else if(splitted[i].equals("-")){	//subtraction
-				first-=nextNum;
-			}else if(splitted[i].equals("*")){	//multiplication
-				first*=nextNum;
-			}else if(splitted[i].equals("/")){	//division
-				first/=nextNum;
+			double next=Double.parseDouble(splitted[i+1]);
+			// if the operator is addition
+			if(splitted[i].equals("+")){ 
+				first+=next;
+			} // if the operator is subtraction
+			else if(splitted[i].equals("-")){	
+				first-=next;
+			} // if the operator is subtraction
+			else if(splitted[i].equals("*")){
+				first*=next;
+			} // if the operator is division
+			else if(splitted[i].equals("/")){
+				first/=next;
 			}
 		}
 		return first;				
 	}
 	
 	@Override
-	public String abbreviatedCellText() {
-		
-		return (getDoubleValue()+"            ").substring(0, 10);	
+	public String abbreviatedCellText() 
+	{
+		return (getDoubleValue()+"            ").substring(0, 10);	// return truncated content
 	}
 
 	@Override
-	public String fullCellText() {
-
-		return getCellText();	//return the formula itself only with correct calculations
+	public String fullCellText() 
+	{
+		return getCellText();
 	}
 }

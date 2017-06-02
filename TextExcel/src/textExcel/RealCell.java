@@ -4,13 +4,15 @@ public abstract class RealCell implements Cell {
 
 	private String content;
 	
+	// setter
+	public void setCellText(String text){
+		content = text;
+	}
+	
+	// getter
 	public String getCellText()
 	{
 		return content;
-	}
-	
-	public void setCellText(String update){
-		content = update;
 	}
 	
 	public RealCell(String input){
@@ -24,12 +26,14 @@ public abstract class RealCell implements Cell {
 	public String abbreviatedCellText() 
 	{
 		String abbreviated = content;
+		// if the content has more than 10 characters
 		if (content.length()>10){
-			return content.substring(0,10);
+			return content.substring(0,10);		// truncate the content to 10 characters
 		}
-		int spaces=10-content.length();
+		// if the content has less than 10 characters
+		int spaces=10-content.length();		// spaces needed to fill in next to the content
 		for (int i=0;i<spaces;i++) {
-			abbreviated=abbreviated+" ";
+			abbreviated=abbreviated+" ";	// fill in the spaces
 		}
 		return abbreviated;
 	}
