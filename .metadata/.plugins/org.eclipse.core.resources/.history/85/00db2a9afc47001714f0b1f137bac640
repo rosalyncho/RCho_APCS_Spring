@@ -1,0 +1,88 @@
+package textExcel;
+
+public class FormulaCell extends RealCell{
+	
+	private Spreadsheet excelSpreadsheet;
+	
+	public FormulaCell(String formula, Spreadsheet excelSheet){
+		super(formula);
+		excelSpreadsheet=excelSheet;
+	}
+	public double getDoubleValue(){
+		String input = getCellText();
+		String[] splitted=input.split(" ");
+		double answer=0;
+		String[] range=splitted[2].split("-");
+		
+		if(splitted[1].toLowerCase().equals("sum")){
+			SpreadsheetLocation start =new SpreadsheetLocation(range[0]);
+			SpreadsheetLocation end =new SpreadsheetLocation(range[1]);
+			double sum=0;
+			for(int j=start.getRow()+1;j<=end.getRow()+1;j++){
+				for (int k=start.getCol();k<=end.getCol();k++){
+					SpreadsheetLocation cellLoc= new SpreadsheetLocation((char)(k+65)+""+j);
+					if((excelSpreadsheet.getCell(cellLoc)) instanceof RealCell){
+						sum=sum + ((RealCell)(excelSpreadsheet.getCell(cellLoc))).getDoubleValue();
+					}
+				}
+			}
+			return sum;
+			
+		}else if(splitted[1].toLowerCase().equals("avg")){
+			SpreadsheetLocation start =new SpreadsheetLocation(range[0]);
+			SpreadsheetLocation end =new SpreadsheetLocation(range[1]);
+			double sum=0;
+			int count=0;
+			for(int j=start.getRow()+1;j<=end.getRow()+1;j++){
+				for (int k=start.getCol();k<=end.getCol();k++){
+					SpreadsheetLocation cellLoc= new SpreadsheetLocation((char)(k+65)+""+j);
+					if((excelSpreadsheet.getCell(cellLoc)) instanceof RealCell){
+						sum=sum + ((RealCell)(excelSpreadsheet.getCell(cellLoc))).getDoubleValue();
+						count++;
+					}
+				}
+			}
+			return sum/count;
+		}
+		if(splitted[1].toUpperCase().charAt(0)>(int)'A'-1 && splitted[1].toUpperCase().charAt(0)<(int)'L'+1 && !(splitted[1].toUpperCase().equals("AVG"))){
+			SpreadsheetLocation cell = new SpreadsheetLocation(splitted[1]);
+			answer=answer + ((RealCell)excelSpreadsheet.getCell(cell)).getDoubleValue();
+		}
+		else if(!(splitted[1].toUpperCase().equals("AVG"))&&!(splitted[1].toUpperCase().equals("SUM"))){
+			answer=Double.parseDouble(splitted[1]);	//initialize currAnswer as first number and cycle through for loop
+		}
+		for (int i = 0; i < splitted.length; i+=2) {
+			if (splitted[i].toUpperCase().charAt(0) >= 'A' && splitted[i].toUpperCase().charAt(0) <= 'L') {
+				SpreadsheetLocation loc = excelSpreadsheet.getLoc(splitted[i].toUpperCase());
+				Cell cell = excelSpreadsheet.getSheet()[loc.getRow()][loc.getCol()];
+				if (cell instanceof RealCell) {
+					splitted[i] = ((RealCell) cell).getDoubleValue() + "";
+				} else {
+					splitted[i] = "";
+				}
+			}
+		}
+		double standingValue = Double.parseDouble(splitted[0]);
+		for (int i = 1; i < splitted.length; i++) {
+			if (splitted[i].equals("*"))
+				standingValue *= Double.parseDouble(splitted[i + 1]);
+			else if (splitted[i].equals("/"))
+				standingValue /= Double.parseDouble(splitted[i + 1]);
+			else if (splitted[i].equals("+"))
+				standingValue += Double.parseDouble(splitted[i + 1]);
+			else if (splitted[i].equals("-"))
+				standingValue -= Double.parseDouble(splitted[i + 1]);
+		}
+		return standingValue;
+	}
+	@Override
+	public String abbreviatedCellText() {
+		return (getDoubleValue()+"            ").substring(0, 10);
+	}
+	
+	@Override
+	public String fullCellText() {
+		return getCellText();
+	}
+
+}

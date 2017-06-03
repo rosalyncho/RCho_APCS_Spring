@@ -1,0 +1,70 @@
+package textExcel;
+
+public class FormulaCell extends RealCell{
+	
+	private Spreadsheet spreadsheet;
+	
+	public FormulaCell(String formula){
+		super(formula);
+	}
+	
+	public FormulaCell(String formula, Spreadsheet sheet) {
+		this(formula);
+		spreadsheet = sheet;
+	}
+	
+	public double getDoubleValue(){
+		String input = getCellText();
+		String[] splitted=input.split(" ");	// splits the formula at spaces
+		// if the formula contains "SUM"
+		if (splitted[0].toLowerCase().contains("sum")) {
+			String[] range = splitted[1].split("-");
+			double answer=0;
+			SpreadsheetLocation cellLocStart= new SpreadsheetLocation (splitted[2].substring(0,splitted[2].indexOf('-')).toUpperCase());
+			SpreadsheetLocation cellLocEnd= new SpreadsheetLocation (splitted[2].substring(splitted[2].indexOf('-')+1).toUpperCase());
+			for(int j=cellLocStart.getRow()+1;j<=cellLocEnd.getRow()+1;j++){
+				for (int k=cellLocStart.getCol();k<=cellLocEnd.getCol();k++){
+					SpreadsheetLocation cellLoc= new SpreadsheetLocation((char)(k+65)+""+j);
+					if((spreadsheet.getCell(cellLoc)) instanceof RealCell){
+						answer=answer + ((RealCell)(spreadsheet.getCell(cellLoc))).getDoubleValue();
+					}
+				}
+			}
+			return answer;
+		}
+		// if the formula contains "AVG"
+		if (splitted[0].toLowerCase().contains("avg")) {
+			
+		}
+		double first=Double.parseDouble(splitted[1]);
+		for(int i=2;i<splitted.length-1;i+=2){
+			double next=Double.parseDouble(splitted[i+1]);
+			// if the operator is addition
+			if(splitted[i].equals("+")){ 
+				first+=next;
+			} // if the operator is subtraction
+			else if(splitted[i].equals("-")){	
+				first-=next;
+			} // if the operator is subtraction
+			else if(splitted[i].equals("*")){
+				first*=next;
+			} // if the operator is division
+			else if(splitted[i].equals("/")){
+				first/=next;
+			}
+		}
+		return first;				
+	}
+	
+	@Override
+	public String abbreviatedCellText() 
+	{
+		return (getDoubleValue()+"            ").substring(0, 10);	// return truncated content
+	}
+
+	@Override
+	public String fullCellText() 
+	{
+		return getCellText();
+	}
+}

@@ -1,0 +1,120 @@
+package textExcel;
+
+public class FormulaCell extends RealCell{
+	
+	private Spreadsheet excelSpreadsheet;
+	
+	public FormulaCell(String formula, Spreadsheet excelSheet){
+		super(formula);
+		excelSpreadsheet=excelSheet;
+	}
+	public double getDoubleValue(){
+		String input = getCellText();
+		String[] splitted=input.split(" ");
+		double answer=0;
+		String[] range=splitted[2].split("-");
+		
+	/*	if(splitted[1].toLowerCase().equals("sum")){
+			SpreadsheetLocation start =new SpreadsheetLocation(range[0]);
+			SpreadsheetLocation end =new SpreadsheetLocation(range[1]);
+			double sum=0;
+			for(int j=start.getRow()+1;j<=end.getRow()+1;j++){
+				for (int k=start.getCol();k<=end.getCol();k++){
+					SpreadsheetLocation cellLoc= new SpreadsheetLocation((char)(k+65)+""+j);
+					if((excelSpreadsheet.getCell(cellLoc)) instanceof RealCell){
+						sum=sum + ((RealCell)(excelSpreadsheet.getCell(cellLoc))).getDoubleValue();
+					}
+				}
+			}
+			return sum;
+			
+		}else if(splitted[1].toLowerCase().equals("avg")){
+			SpreadsheetLocation start =new SpreadsheetLocation(range[0]);
+			SpreadsheetLocation end =new SpreadsheetLocation(range[1]);
+			double sum=0;
+			int count=0;
+			for(int j=start.getRow()+1;j<=end.getRow()+1;j++){
+				for (int k=start.getCol();k<=end.getCol();k++){
+					SpreadsheetLocation cellLoc= new SpreadsheetLocation((char)(k+65)+""+j);
+					if((excelSpreadsheet.getCell(cellLoc)) instanceof RealCell){
+						sum=sum + ((RealCell)(excelSpreadsheet.getCell(cellLoc))).getDoubleValue();
+						count++;
+					}
+				}
+			}
+			return sum/count;
+		}
+		*/
+		if(splitted[1].toLowerCase().equals("sum") || splitted[1].toLowerCase().equals("avg")){
+			SpreadsheetLocation start = new SpreadsheetLocation(range[0]);
+			SpreadsheetLocation end = new SpreadsheetLocation(range[1]);
+			double sum=0;
+			int count = 0;
+			for(int i=start.getRow()+1;i<=end.getRow()+1;i++){
+				for (int j=start.getCol();j<=end.getCol();j++){
+					SpreadsheetLocation cellLoc= new SpreadsheetLocation((char)(j+65)+""+i);
+					if((excelSpreadsheet.getCell(cellLoc)) instanceof RealCell){
+						sum=sum + ((RealCell)(excelSpreadsheet.getCell(cellLoc))).getDoubleValue();
+				}
+			}
+		} if(splitted[1].toLowerCase().equals("avg")) {
+			count++;
+			return sum/count;
+		} else if(splitted[1].toLowerCase().equals("sum")) {
+		return sum;
+		
+		}
+		if(splitted[1].toUpperCase().charAt(0)>'A'-1 && splitted[1].toUpperCase().charAt(0)<'L'-1){
+			SpreadsheetLocation cell = new SpreadsheetLocation(splitted[1]);
+			answer=answer + ((RealCell)excelSpreadsheet.getCell(cell)).getDoubleValue();
+		} else {
+			answer=Double.parseDouble(splitted[1]);
+		}
+		for(int i=2;i<splitted.length-1;i+=2){
+				if(splitted[i].equals("+")){			//addition
+					if(splitted[i+1].toUpperCase().charAt(0)>(int)'A'-1 && splitted[i+1].toUpperCase().charAt(0)<(int)'L'+1){
+						SpreadsheetLocation cell = new SpreadsheetLocation(splitted[i+1]);
+						answer+= ((RealCell)excelSpreadsheet.getCell(cell)).getDoubleValue();
+					}else{
+						double firstNum=Double.parseDouble(splitted[i+1]);
+						answer+=firstNum;
+					}
+				}else if(splitted[i].equals("-")){	//subtraction
+					if(splitted[i+1].toUpperCase().charAt(0)>(int)'A'-1 && splitted[i+1].toUpperCase().charAt(0)<(int)'L'+1){
+						SpreadsheetLocation cell = new SpreadsheetLocation(splitted[i+1]);
+						answer-= ((RealCell)excelSpreadsheet.getCell(cell)).getDoubleValue();
+					}else{
+						double firstNum=Double.parseDouble(splitted[i+1]);
+						answer-=firstNum;
+					}
+				}else if(splitted[i].equals("*")){	//multiplication
+					if(splitted[i+1].toUpperCase().charAt(0)>(int)'A'-1 && splitted[i+1].toUpperCase().charAt(0)<(int)'L'+1){
+						SpreadsheetLocation cell = new SpreadsheetLocation(splitted[i+1]);
+						answer*= ((RealCell)excelSpreadsheet.getCell(cell)).getDoubleValue();
+					}else{
+						double firstNum=Double.parseDouble(splitted[i+1]);
+						answer*=firstNum;
+					}
+				}else if(splitted[i].equals("/")){	//division
+					if(splitted[i+1].toUpperCase().charAt(0)>(int)'A'-1 && splitted[i+1].toUpperCase().charAt(0)<(int)'L'+1){
+						SpreadsheetLocation cell = new SpreadsheetLocation(splitted[i+1]);
+						answer/= ((RealCell)excelSpreadsheet.getCell(cell)).getDoubleValue();
+					}else{
+						double firstNum=Double.parseDouble(splitted[i+1]);
+						answer/=firstNum;
+					}
+				}
+			}
+		return answer;
+	}
+	@Override
+	public String abbreviatedCellText() {
+		return (getDoubleValue()+"            ").substring(0, 10);
+	}
+	
+	@Override
+	public String fullCellText() {
+		return getCellText();
+	}
+
+}
